@@ -1,4 +1,0 @@
-{"msg":"init","dagFile":"artifacts\\tundra.dag","targets":[]}
-{"msg":"newNode","annotation":"Il2Cpp C:/Personal/University/ARVRResearch/Enhanced Learning Enviroment/Library/Il2cppBuildCache/UWP/ARM64/il2cppOutput","index":1}
-{"msg":"noderesult","annotation":"Il2Cpp C:/Personal/University/ARVRResearch/Enhanced Learning Enviroment/Library/Il2cppBuildCache/UWP/ARM64/il2cppOutput","index":1,"exitcode":0}
-{"msg":"newNode","annotation":"all_tundra_nodes","index":0}
