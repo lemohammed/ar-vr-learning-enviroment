@@ -366,23 +366,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4406797679346460454, guid: 4e7abe5a6db0abc43be532eead7ba806, type: 3}
       propertyPath: pressDistance
-      value: 0.1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4406797679346460454, guid: 4e7abe5a6db0abc43be532eead7ba806, type: 3}
       propertyPath: maxPushDistance
-      value: 1
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4406797679346460454, guid: 4e7abe5a6db0abc43be532eead7ba806, type: 3}
       propertyPath: distanceSpaceMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4406797679346460454, guid: 4e7abe5a6db0abc43be532eead7ba806, type: 3}
       propertyPath: startPushDistance
-      value: 0.1
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4406797679346460454, guid: 4e7abe5a6db0abc43be532eead7ba806, type: 3}
       propertyPath: releaseDistanceDelta
-      value: 0.020000003
+      value: 0.002
       objectReference: {fileID: 0}
     - target: {fileID: 4541138717772488360, guid: 4e7abe5a6db0abc43be532eead7ba806, type: 3}
       propertyPath: m_Size.x
@@ -454,7 +454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4541138719399352405, guid: 4e7abe5a6db0abc43be532eead7ba806, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4541138719399352405, guid: 4e7abe5a6db0abc43be532eead7ba806, type: 3}
       propertyPath: m_LocalRotation.w
@@ -627,7 +627,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389033990}
   m_LocalRotation: {x: 0.0012885847, y: -0, z: -0, w: 0.99999917}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_Children:
   - {fileID: 1985538750}

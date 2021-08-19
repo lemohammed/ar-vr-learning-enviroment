@@ -117,10 +117,11 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     public void AppendDataToFile(string filename, string data)
     {
         Debug.Log(string.Format("Appending: {0} to {1}", data, filename));
-        string path = string.Format("{0}/TrackedData/{1}", Application.persistentDataPath, starttime);
+        string path = string.Format("{0}/TrackedData/{1}", Application.persistentDataPath, getUnixTime().ToString());
         //If file path does not already exists, create it
         if (!Directory.Exists(path))
         {
+
             Directory.CreateDirectory(path);
         }
 
@@ -145,7 +146,7 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     {
         MixedRealityPose fingerPose;
         if (eventData.InputData.TryGetValue(TrackedHandJoint.IndexTip, out fingerPose))
-        {
+
             if (eventData.Handedness == Handedness.Right)
             {
                 Vector3 dist = fingerPose.Position - position;
@@ -154,7 +155,6 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
 
             }
 
-        }
     }
     private string GetLogGazeTargets()
     {

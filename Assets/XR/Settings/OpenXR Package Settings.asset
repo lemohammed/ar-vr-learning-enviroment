@@ -132,6 +132,26 @@ MonoBehaviour:
   company: Unity
   priority: 0
   required: 0
+--- !u!114 &-8140448617337569574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef793c31862a37448e907829482ef80, type: 3}
+  m_Name: OculusQuestFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Oculus Quest Support
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.oculusquest
+  openxrExtensionStrings: XR_OCULUS_android_initialize_loader
+  company: Unity
+  priority: 0
+  required: 0
 --- !u!114 &-8047854099755345210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1626,6 +1646,26 @@ MonoBehaviour:
   company: Unity
   priority: 0
   required: 0
+--- !u!114 &-818122289664749422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: OculusQuestFeature Android
+  m_EditorClassIdentifier: Unity.XR.OpenXR.Features.OculusQuestSupport:UnityEngine.XR.OpenXR.Features.OculusQuestSupport:OculusQuestFeature
+  m_enabled: 0
+  nameUi: Oculus Quest Support
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.oculusquest
+  openxrExtensionStrings: XR_OCULUS_android_initialize_loader
+  company: Unity
+  priority: 0
+  required: 0
 --- !u!114 &-653293727363791031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2597,6 +2637,26 @@ MonoBehaviour:
   - {fileID: 2021754105779916276}
   m_renderMode: 1
   m_depthSubmissionMode: 0
+--- !u!114 &3134992995847252981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef793c31862a37448e907829482ef80, type: 3}
+  m_Name: OculusQuestFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Oculus Quest Support
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.oculusquest
+  openxrExtensionStrings: XR_OCULUS_android_initialize_loader
+  company: Unity
+  priority: 0
+  required: 0
 --- !u!114 &3303809984827035014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3041,21 +3101,21 @@ MonoBehaviour:
   features:
   - {fileID: -4711804362080220903}
   - {fileID: 2823631232181636876}
-  - {fileID: 301815386212528996}
-  - {fileID: 155721445676885483}
-  - {fileID: -7559630657177380500}
   - {fileID: -5858770524565379426}
   - {fileID: -1208725086346388417}
   - {fileID: -1754675999414978620}
   - {fileID: 8991467330021047678}
-  - {fileID: -1135624276893566187}
-  - {fileID: -6685486483746125889}
-  - {fileID: 7800213584992051813}
   - {fileID: 6613908816815920780}
-  - {fileID: 7135324270370811753}
   - {fileID: 7985870427423766371}
+  - {fileID: -7559630657177380500}
+  - {fileID: 301815386212528996}
+  - {fileID: 155721445676885483}
+  - {fileID: 7800213584992051813}
   - {fileID: -5031950816859804024}
   - {fileID: 7993952344378405488}
+  - {fileID: -6685486483746125889}
+  - {fileID: -1135624276893566187}
+  - {fileID: 7135324270370811753}
   m_renderMode: 1
   m_depthSubmissionMode: 0
 --- !u!114 &5385490972900427011
@@ -3168,7 +3228,7 @@ MonoBehaviour:
   - {fileID: -1698279692560498462}
   - {fileID: 2697718232890077794}
   - {fileID: 1224717595917886540}
-  - {fileID: -6092991049700999957}
+  - {fileID: 3134992995847252981}
   - {fileID: 5836901496270185081}
   m_renderMode: 1
   m_depthSubmissionMode: 0
@@ -3229,6 +3289,26 @@ MonoBehaviour:
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.oculustouch
   openxrExtensionStrings: 
+  company: Unity
+  priority: 0
+  required: 0
+--- !u!114 &6174750652445037896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef793c31862a37448e907829482ef80, type: 3}
+  m_Name: OculusQuestFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Oculus Quest Support
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.oculusquest
+  openxrExtensionStrings: XR_OCULUS_android_initialize_loader
   company: Unity
   priority: 0
   required: 0
@@ -3618,6 +3698,26 @@ MonoBehaviour:
   openxrExtensionStrings: XR_MSFT_holographic_remoting
   company: Microsoft
   priority: -100
+  required: 0
+--- !u!114 &7410903665139278401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef793c31862a37448e907829482ef80, type: 3}
+  m_Name: OculusQuestFeature Android
+  m_EditorClassIdentifier: 
+  m_enabled: 0
+  nameUi: Oculus Quest Support
+  version: 1.0.0
+  featureIdInternal: com.unity.openxr.feature.oculusquest
+  openxrExtensionStrings: XR_OCULUS_android_initialize_loader
+  company: Unity
+  priority: 0
   required: 0
 --- !u!114 &7473322229319576557
 MonoBehaviour:
