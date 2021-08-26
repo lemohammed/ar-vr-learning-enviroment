@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "com.microsoft.altspacevr_uploader": {
+      "version": "file:MixedReality/com.microsoft.altspacevr_uploader-0.9.4.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.unity.xr.management": "4.0.1",
+        "com.unity.xr.oculus": "1.8.1",
+        "com.unity.editorcoroutines": "1.0.0"
+      }
+    },
+    "com.microsoft.mixedreality.input": {
+      "version": "file:MixedReality/com.microsoft.mixedreality.input-0.9.2006.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
     "com.microsoft.mixedreality.openxr": {
       "version": "file:MixedReality/com.microsoft.mixedreality.openxr-0.9.5.tgz",
       "depth": 0,
@@ -83,6 +99,21 @@
         "com.microsoft.mixedreality.toolkit.foundation": "2.7.0"
       }
     },
+    "com.microsoft.mixedreality.webrtc": {
+      "version": "file:MixedReality/com.microsoft.mixedreality.webrtc-2.0.2.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
+    "com.microsoft.mixedreality.webrtc.samples": {
+      "version": "file:MixedReality/com.microsoft.mixedreality.webrtc.samples-2.0.2.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {
+        "com.microsoft.mixedreality.webrtc": "2.0.2",
+        "com.unity.textmeshpro": "1.4.1"
+      }
+    },
     "com.microsoft.spatialaudio.spatializer.unity": {
       "version": "file:MixedReality/com.microsoft.spatialaudio.spatializer.unity-1.0.196.tgz",
       "depth": 0,
@@ -102,6 +133,13 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.editorcoroutines": {
+      "version": "1.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
@@ -219,18 +257,9 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.xr.interactionsubsystems": {
-      "version": "1.0.1",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.subsystemregistration": "1.0.6"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.xr.legacyinputhelpers": {
       "version": "2.1.7",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.vr": "1.0.0",
@@ -239,8 +268,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.management": {
-      "version": "4.0.7",
-      "depth": 0,
+      "version": "4.0.1",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.subsystems": "1.0.0",
@@ -248,6 +277,16 @@
         "com.unity.modules.xr": "1.0.0",
         "com.unity.xr.legacyinputhelpers": "2.1.7",
         "com.unity.subsystemregistration": "1.0.6"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.xr.oculus": {
+      "version": "1.9.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.xr.management": "4.0.1",
+        "com.unity.ugui": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -259,20 +298,6 @@
         "com.unity.xr.management": "4.0.1",
         "com.unity.xr.legacyinputhelpers": "2.1.2",
         "com.unity.inputsystem": "1.0.2"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.xr.windowsmr": {
-      "version": "4.5.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.subsystems": "1.0.0",
-        "com.unity.modules.vr": "1.0.0",
-        "com.unity.modules.xr": "1.0.0",
-        "com.unity.xr.management": "4.0.1",
-        "com.unity.xr.interactionsubsystems": "1.0.1",
-        "com.unity.xr.arsubsystems": "4.0.9"
       },
       "url": "https://packages.unity.com"
     },

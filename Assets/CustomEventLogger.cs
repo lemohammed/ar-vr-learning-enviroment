@@ -13,17 +13,22 @@ using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
 
-public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler, IMixedRealityHandJointHandler
+public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler, IMixedRealityHandJointHandler 
 {
-    private int frames = 0;
     //Lesson list containing 
-    private int lessonID = 0;
+    private int lessonID = 1;
+    public GameObject Button1;
+    public GameObject Button2;
+    static private string startTime = getUnixTime().ToString();
+
     private string starttime;
-    public EyeTracking eyeTracking;
     //Start time, used to create Output folder on the hololens
     private Vector3 position;
 
-    int getUnixTime()
+    [SerializeField] TextMeshPro m_Object;
+
+
+    static public int getUnixTime()
     {
         System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
         int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
@@ -31,11 +36,15 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     }
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        // FirstButton.OnClick.AddListener(TaskOnClick);
         AppendDataToFile("StartUpLogs", "Start up successfull at," + getUnixTime().ToString());
-        AppendDataToFile("gazeData", "timestamp, Target Name, Target Location, Head Direction, Head Location");
+        AppendDataToFile("gazeData", "timestamp, LessonId, Target Name, Target Location, Head Direction, Head Location");
         AppendDataToFile("handTracking", "timestamp, message");
     }
+
+
+
     private void OnEnable()
     {
         // Instruct Input System that we would like to receive all input events of type
@@ -117,7 +126,7 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     public void AppendDataToFile(string filename, string data)
     {
         Debug.Log(string.Format("Appending: {0} to {1}", data, filename));
-        string path = string.Format("{0}/TrackedData/{1}", Application.persistentDataPath, getUnixTime().ToString());
+        string path = string.Format("{0}/TrackedData/{1}/{2}", Application.persistentDataPath, lessonID,startTime);
         //If file path does not already exists, create it
         if (!Directory.Exists(path))
         {
@@ -160,6 +169,8 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     {
         string payload = "";
         payload += getUnixTime().ToString();
+        payload += ','+lessonID;
+
         if (CoreServices.InputSystem.GazeProvider.GazeTarget)
         {
             payload += "," + CoreServices.InputSystem.GazeProvider.GazeTarget;
@@ -173,5 +184,14 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
         payload += "," + CoreServices.InputSystem.GazeProvider.GazeDirection;
         payload += "," + CoreServices.InputSystem.GazeProvider.GazeOrigin;
         return payload;
+    }
+  public void TaskOnClick()
+    {
+        m_Object.text = "Success"; 
+        Button1.SetActive(false);
+        Button2.SetActive(true);
+
+        //Output this to console when Button1 or Button3 is clicked
+        Debug.Log("You have clicked the button!");
     }
 }
