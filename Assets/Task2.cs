@@ -7,6 +7,7 @@ public class Task2 : MonoBehaviour
     private int clickCount =0;
     public GameObject Task2Object;
     public GameObject Task3Object;
+    public GameObject LocalVideoPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class Task2 : MonoBehaviour
         if(clickCount>=2){
             Task2Object.SetActive(false);
             Task3Object.SetActive(true);
+            GameObject.Find("LocalVideoPlayer").SetActive(false);
         }
     }
 }
