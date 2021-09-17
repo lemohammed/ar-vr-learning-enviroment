@@ -9,7 +9,7 @@ Shader "Mixed Reality Toolkit/Standard"
     Properties
     {
         // Main maps.
-        _Color("Color", Color) = (1.0, 1.0, 1.0, 1.0)
+        _Color("Color", Color) = (69, 154, 43, 255)
         _MainTex("Albedo", 2D) = "white" {}
         [Enum(AlbedoAlphaMode)] _AlbedoAlphaMode("Albedo Alpha Mode", Float) = 0 // "Transparency"
         [Toggle] _AlbedoAssignedAtRuntime("Albedo Assigned at Runtime", Float) = 0.0

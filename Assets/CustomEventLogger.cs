@@ -13,13 +13,14 @@ using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
 
-public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler, IMixedRealityHandJointHandler 
+public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler, IMixedRealityHandJointHandler
 {
-    //Lesson list containing 
+    //Lesson list containing
     private int lessonID = 1;
     public GameObject Button1;
     public GameObject Button2;
     static private string startTime = getUnixTime().ToString();
+    static private char delimeter = '-';
 
     private string starttime;
     //Start time, used to create Output folder on the hololens
@@ -36,10 +37,10 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     }
     // Start is called before the first frame update
     void Start()
-    {   
+    {
         // FirstButton.OnClick.AddListener(TaskOnClick);
         AppendDataToFile("StartUpLogs", "Start up successfull at," + getUnixTime().ToString());
-        AppendDataToFile("gazeData", "timestamp, LessonId, Target Name, Target Location, Head Direction, Head Location");
+        AppendDataToFile("gazeData", "currentTimestamp-LessonId-Target Name-Target Location-Head Direction-Head Position");
         AppendDataToFile("handTracking", "timestamp, message");
     }
 
@@ -169,25 +170,26 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     {
         string payload = "";
         payload += getUnixTime().ToString();
-        payload += ','+lessonID;
+        payload += delimeter+lessonID.ToString();
 
         if (CoreServices.InputSystem.GazeProvider.GazeTarget)
         {
-            payload += "," + CoreServices.InputSystem.GazeProvider.GazeTarget;
-            payload += "," + CoreServices.InputSystem.GazeProvider.GazeTarget.transform.position;
+            payload += delimeter + CoreServices.InputSystem.GazeProvider.GazeTarget.ToString();
+            payload += delimeter + CoreServices.InputSystem.GazeProvider.GazeTarget.transform.position.ToString();
 
         }
         else
         {
-            payload += ",,";
+            payload += delimeter + "No Target";
+            payload += delimeter + "No Target Position";
         }
-        payload += "," + CoreServices.InputSystem.GazeProvider.GazeDirection;
-        payload += "," + CoreServices.InputSystem.GazeProvider.GazeOrigin;
+        payload += delimeter + CoreServices.InputSystem.GazeProvider.GazeDirection.ToString();
+        payload += delimeter + CoreServices.InputSystem.GazeProvider.GazeOrigin.ToString();
         return payload;
     }
   public void TaskOnClick()
     {
-        m_Object.text = "Success"; 
+        m_Object.text = "Success";
         Button1.SetActive(false);
         Button2.SetActive(true);
 
