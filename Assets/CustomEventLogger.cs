@@ -1,53 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using Microsoft.MixedReality.Toolkit.UI;
-using TMPro;
 using System.Text;
 using System.IO;
+using Debug = UnityEngine.Debug;
+using UnityEngine;
+using Microsoft.MixedReality.Toolkit.UI;
+using UnityEngine.UI;
+using TMPro;
 using System;
 using System.Diagnostics;
-using Debug = UnityEngine.Debug;
 using Microsoft.MixedReality.Toolkit;
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.Utilities;
+using static file.logger.Logger;
 
+
+
+namespace events.logger
+{
+    
 public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler, IMixedRealityHandJointHandler
 {
     //Lesson list containing
-    private int lessonID = 1;
+    private static System.Random rnd = new System.Random();
+
+    public int lessonID = rnd.Next(10000000);
     public GameObject Button1;
     public GameObject Button2;
     static private string startTime = getUnixTime().ToString();
-    static private char delimeter = '-';
-
-    private string starttime;
-    static private int startTimeInt = getUnixTime();
-
+    static public int startTimeInt=getUnixTime();
+    static public int currentTimerTime;
     //Start time, used to create Output folder on the hololens
     private Vector3 position;
-
     [SerializeField] TextMeshPro m_Object;
     [SerializeField] TextMeshPro timer;
 
 
-    static public int getUnixTime()
-    {
-        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
-        int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
-        return cur_time;
-    }
+   
     // Start is called before the first frame update
     void Start()
     {
-        // FirstButton.OnClick.AddListener(TaskOnClick);
-        AppendDataToFile("StartUpLogs", "Start up successfull at," + getUnixTime().ToString());
-        AppendDataToFile("gazeData", "currentTimestamp-LessonId-Target Name-Target Location-Head Direction-Head Position");
-        AppendDataToFile("handTracking", "timestamp, message");
+            ResetTimer();
+            string[] GAZE_DATA_HEADERS = { "currentTimestamp", "LessonId", "Target Name", "Target Location", "Head Direction", "Head Position" };
+            CreateFile(START_UP_LOGS, "Start up successfull at," + getUnixTime().ToString());
+            CreateFile(GAZE_DATA, string.Join(delimeter, headers));
+            CreateFile(HAND_TRACKING, "timestamp, message");
+            CreateFile(TASK_LOGS, "Time-Task-Time Taken-Tries");
     }
 
-
+    public void EndTask(){
+        AppendDataToFile(TASK_LOGS, string.Format("{0}-{1}",getUnixTime().ToString(),currentTimerTime.ToString()));
+    }
 
     private void OnEnable()
     {
@@ -88,90 +91,83 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
         }
     }
 
-    public void ResetTimer(){
+    public static void ResetTimer(){
         startTimeInt = getUnixTime();
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer.text = (getUnixTime()-startTimeInt).ToString();
-        string gazeTargetLog = GetGazeTargetLog();
-        if(gazeTargetLog!=""){
-            AppendDataToFile("gazeData", gazeTargetLog);
-        }
-        // try
-        // {
-        //     frames++;
-        //     Debug.Log(getUnixTime());
-        //     if (frames % 10 == 0)
-        //     {
-        //         Stack<EyeTracking.GazeTarget> gazeStack = eyeTracking.gazedObjects;
-        //         int n = 3; // Amount of previous gaze targets to be logged
-        //         n = Mathf.Min(n, gazeStack.Count);
-        //         // Reads n most recent gaze targets from stack, and logs them
-        //         for (int i = 0; i < n; i++)
-        //         {
-        //             EyeTracking.GazeTarget g = gazeStack.Pop();
-        //             try
-        //             {
-        //                 string gText = g.gameObject.gameObject.GetComponent<ButtonConfigHelper>().MainLabelText;
-        //                 string gazeTarget = string.Format("\tGaze Start:{0} Gaze Target:{1} Gaze Duration(In Frames): {2}", g.startTime, gText, g.duration);
-        //                 AppendDataToFile("EyeGaze", gazeTarget);
-        //             }
-        //             catch (Exception e)
-        //             {
-        //                 Debug.Log("Could not find Gaze Target In Stack");
-        //             }
-
-        //         }
-        //         //Clear stack, so gaze tracking can start again for next question
-        //         eyeTracking.gazedObjects = new Stack<EyeTracking.GazeTarget>();
-        //     }
-        // }
-        // catch (NullReferenceException e)
-        // {
-        //     Debug.Log(e);
-        // }
-
+            // ResetTimer();
+            currentTimerTime =(getUnixTime()-startTimeInt);
+            timer.text = currentTimerTime.ToString();
+            string gazeTargetLog = GetGazeTargetLog();
+            if(gazeTargetLog!=""){
+                AppendDataToFile("gazeData", gazeTargetLog);
+            }
     }
-    public void AppendDataToFile(string filename, string data)
-    {
-        Debug.Log(string.Format("Appending: {0} to {1}", data, filename));
+    // void LogEyeTracking(){
+    //     try
+    //     {
+    //         frames++;
+    //         Debug.Log(getUnixTime());
+    //         if (frames % 10 == 0)
+    //         {
+    //             Stack<EyeTracking.GazeTarget> gazeStack = eyeTracking.gazedObjects;
+    //             int n = 3; // Amount of previous gaze targets to be logged
+    //             n = Mathf.Min(n, gazeStack.Count);
+    //             // Reads n most recent gaze targets from stack, and logs them
+    //             for (int i = 0; i < n; i++)
+    //             {
+    //                 EyeTracking.GazeTarget g = gazeStack.Pop();
+    //                 try
+    //                 {
+    //                     string gText = g.gameObject.gameObject.GetComponent<ButtonConfigHelper>().MainLabelText;
+    //                     string gazeTarget = string.Format("\tGaze Start:{0} Gaze Target:{1} Gaze Duration(In Frames): {2}", g.startTime, gText, g.duration);
+    //                     AppendDataToFile("EyeGaze", gazeTarget);
+    //                 }
+    //                 catch (Exception e)
+    //                 {
+    //                     Debug.Log("Could not find Gaze Target In Stack");
+    //                 }
+
+    //             }
+    //             //Clear stack, so gaze tracking can start again for next question
+    //             eyeTracking.gazedObjects = new Stack<EyeTracking.GazeTarget>();
+    //         }
+    //     }
+    //     catch (NullReferenceException e)
+    //     {
+    //         Debug.Log(e);
+    //     }
+    // }
+   
+    public void CreateFile(string filename, string initialData){
         string path = string.Format("{0}/TrackedData/{1}/{2}", Application.persistentDataPath,lessonID,startTime);
-        //If file path does not already exists, create it
-        if (!Directory.Exists(path))
-        {
-
-            Directory.CreateDirectory(path);
-        }
-
         path = Path.Combine(path, filename + ".txt");
         //If File does not already exist, create it
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
         if (!File.Exists(path))
         {
             // Create a file to write to.
             using (StreamWriter sw = File.CreateText(path))
             {
-                sw.WriteLine(data);
+                sw.WriteLine(initialData);
             }
         }
-
-        //Write to file
-        using (StreamWriter sw = File.AppendText(path))
-        {
-            sw.WriteLine(data);
-        }
     }
+  
     public void OnHandJointsUpdated(InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> eventData)
     {
         MixedRealityPose fingerPose;
-        if (eventData.InputData.TryGetValue(TrackedHandJoint.IndexTip, out fingerPose))
+        if (eventData.InputData.TryGetValue(TrackedHandJoint.IndexTip, out fingerPose)){
             Vector3 dist = fingerPose.Position - position;
             string message = Math.Round(dist.magnitude, 3) + "\n" + dist.ToString();
             AppendDataToFile("handTracking", getUnixTime().ToString() + "," + message);
-
-
+        }
     }
     private string GetGazeTargetLog()
     {
@@ -199,8 +195,10 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
         m_Object.text = "Success";
         Button1.SetActive(false);
         Button2.SetActive(true);
-
         //Output this to console when Button1 or Button3 is clicked
         Debug.Log("You have clicked the button!");
     }
 }
+
+}
+
