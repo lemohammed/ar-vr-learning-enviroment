@@ -23,10 +23,13 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     static private char delimeter = '-';
 
     private string starttime;
+    static private int startTimeInt = getUnixTime();
+
     //Start time, used to create Output folder on the hololens
     private Vector3 position;
 
     [SerializeField] TextMeshPro m_Object;
+    [SerializeField] TextMeshPro timer;
 
 
     static public int getUnixTime()
@@ -85,10 +88,18 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
         }
     }
 
+    public void ResetTimer(){
+        startTimeInt = getUnixTime();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        AppendDataToFile("gazeData", GetLogGazeTargets());
+        timer.text = (getUnixTime()-startTimeInt).ToString();
+        string gazeTargetLog = GetGazeTargetLog();
+        if(gazeTargetLog!=""){
+            AppendDataToFile("gazeData", gazeTargetLog);
+        }
         // try
         // {
         //     frames++;
@@ -127,7 +138,7 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     public void AppendDataToFile(string filename, string data)
     {
         Debug.Log(string.Format("Appending: {0} to {1}", data, filename));
-        string path = string.Format("{0}/TrackedData/{1}/{2}", Application.persistentDataPath, lessonID,startTime);
+        string path = string.Format("{0}/TrackedData/{1}/{2}", Application.persistentDataPath,lessonID,startTime);
         //If file path does not already exists, create it
         if (!Directory.Exists(path))
         {
@@ -142,7 +153,7 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
             // Create a file to write to.
             using (StreamWriter sw = File.CreateText(path))
             {
-                sw.WriteLine(filename + " At time " + starttime);
+                sw.WriteLine(data);
             }
         }
 
@@ -156,22 +167,15 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     {
         MixedRealityPose fingerPose;
         if (eventData.InputData.TryGetValue(TrackedHandJoint.IndexTip, out fingerPose))
+            Vector3 dist = fingerPose.Position - position;
+            string message = Math.Round(dist.magnitude, 3) + "\n" + dist.ToString();
+            AppendDataToFile("handTracking", getUnixTime().ToString() + "," + message);
 
-            if (eventData.Handedness == Handedness.Right)
-            {
-                Vector3 dist = fingerPose.Position - position;
-                string message = Math.Round(dist.magnitude, 3) + "\n" + dist.ToString();
-                AppendDataToFile("handTracking", getUnixTime().ToString() + "," + message);
-
-            }
 
     }
-    private string GetLogGazeTargets()
+    private string GetGazeTargetLog()
     {
         string payload = "";
-        payload += getUnixTime().ToString();
-        payload += delimeter+lessonID.ToString();
-
         if (CoreServices.InputSystem.GazeProvider.GazeTarget)
         {
             payload += delimeter + CoreServices.InputSystem.GazeProvider.GazeTarget.ToString();
@@ -183,6 +187,9 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
             payload += delimeter + "No Target";
             payload += delimeter + "No Target Position";
         }
+        payload += getUnixTime().ToString();
+        payload += delimeter+lessonID.ToString();
+
         payload += delimeter + CoreServices.InputSystem.GazeProvider.GazeDirection.ToString();
         payload += delimeter + CoreServices.InputSystem.GazeProvider.GazeOrigin.ToString();
         return payload;
