@@ -40,12 +40,13 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     // Start is called before the first frame update
     void Start()
     {
-            ResetTimer();
-            string[] GAZE_DATA_HEADERS = { "currentTimestamp", "LessonId", "Target Name", "Target Location", "Head Direction", "Head Position" };
-            CreateFile(START_UP_LOGS, "Start up successfull at," + getUnixTime().ToString());
-            CreateFile(GAZE_DATA, string.Join(delimeter, headers));
-            CreateFile(HAND_TRACKING, "timestamp, message");
-            CreateFile(TASK_LOGS, "Time-Task-Time Taken-Tries");
+        string[] headers = {"currentTimestamp", "LessonId", "Target Name", "Target Location", "Head Direction", "Head Position"};
+        string GAZE_DATA_HEADER_ROW = string.Join(delimeter.ToString(),headers);
+        ResetTimer();
+        CreateFile(START_UP_LOGS, "Start up successfull at," + getUnixTime().ToString());
+        CreateFile(GAZE_DATA, GAZE_DATA_HEADER_ROW);
+        CreateFile(HAND_TRACKING, "timestamp, message");
+        CreateFile(TASK_LOGS, "Time-Task-Time Taken-Tries");
     }
 
     public void EndTask(){
