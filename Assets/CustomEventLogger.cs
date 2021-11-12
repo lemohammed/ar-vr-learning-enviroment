@@ -32,7 +32,6 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     static public int currentTimerTime;
     //Start time, used to create Output folder on the hololens
     private Vector3 position;
-    [SerializeField] TextMeshPro m_Object;
     [SerializeField] TextMeshPro timer;
 
 
@@ -42,14 +41,14 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     {
             ResetTimer();
             string[] GAZE_DATA_HEADERS = { "currentTimestamp", "LessonId", "Target Name", "Target Location", "Head Direction", "Head Position" };
-            CreateFile(START_UP_LOGS, "Start up successfull at," + getUnixTime().ToString());
-            CreateFile(GAZE_DATA, string.Join(delimeter, headers));
-            CreateFile(HAND_TRACKING, "timestamp, message");
-            CreateFile(TASK_LOGS, "Time-Task-Time Taken-Tries");
+            // CreateFile(START_UP_LOGS, "Start up successfull at," + getUnixTime().ToString());
+            // CreateFile(GAZE_DATA, string.Join('/'.ToString(),GAZE_DATA_HEADERS));
+            // CreateFile(HAND_TRACKING, "timestamp, message");
+            // CreateFile(TASK_LOGS, "Time-Task-Time Taken-Tries");
     }
 
     public void EndTask(){
-        AppendDataToFile(TASK_LOGS, string.Format("{0}-{1}",getUnixTime().ToString(),currentTimerTime.ToString()));
+        // AppendDataToFile(TASK_LOGS, string.Format("{0}-{1}",getUnixTime().ToString(),currentTimerTime.ToString()));
     }
 
     private void OnEnable()
@@ -99,12 +98,20 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     void Update()
     {
             // ResetTimer();
+            try
+            {
             currentTimerTime =(getUnixTime()-startTimeInt);
             timer.text = currentTimerTime.ToString();
-            string gazeTargetLog = GetGazeTargetLog();
-            if(gazeTargetLog!=""){
-                AppendDataToFile("gazeData", gazeTargetLog);
+                
             }
+            catch (System.Exception ex)
+            {
+                 // TODO
+            }
+            // string gazeTargetLog = GetGazeTargetLog();
+            // if(gazeTargetLog!=""){
+            //     AppendDataToFile("gazeData", gazeTargetLog);
+            // }
     }
     // void LogEyeTracking(){
     //     try
@@ -162,12 +169,12 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
   
     public void OnHandJointsUpdated(InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> eventData)
     {
-        MixedRealityPose fingerPose;
-        if (eventData.InputData.TryGetValue(TrackedHandJoint.IndexTip, out fingerPose)){
-            Vector3 dist = fingerPose.Position - position;
-            string message = Math.Round(dist.magnitude, 3) + "\n" + dist.ToString();
-            AppendDataToFile("handTracking", getUnixTime().ToString() + "," + message);
-        }
+        // MixedRealityPose fingerPose;
+        // if (eventData.InputData.TryGetValue(TrackedHandJoint.IndexTip, out fingerPose)){
+        //     Vector3 dist = fingerPose.Position - position;
+        //     string message = Math.Round(dist.magnitude, 3) + "\n" + dist.ToString();
+        //     AppendDataToFile("handTracking", getUnixTime().ToString() + "," + message);
+        // }
     }
     private string GetGazeTargetLog()
     {
@@ -192,7 +199,6 @@ public class CustomEventLogger : MonoBehaviour, IMixedRealitySourceStateHandler,
     }
   public void TaskOnClick()
     {
-        m_Object.text = "Success";
         Button1.SetActive(false);
         Button2.SetActive(true);
         //Output this to console when Button1 or Button3 is clicked
