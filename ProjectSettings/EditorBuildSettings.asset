@@ -9,7 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MrtkScene.unity
     guid: f1850420adc969947b13100215177ede
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 073cea4cbedfe8548940e82a0a05bb44, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 2654bababde8c0d42811a6a2a28e2456, type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: edb9d6e65c8f7a2469730a1f1b0bdb3c, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: e1254c7e5d227684184f68cc72e20d3e, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 342a7bc26014bd94e92dc11c8e06fde7, type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 2589da00b9768eb4188fc5a1f07ae097, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 1d8c899c42c02b14d9510697af9a7422, type: 2}
